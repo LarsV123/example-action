@@ -1,0 +1,40 @@
+name: "Shared workflow example"
+
+on:
+  workflow_call:
+    inputs:
+      java_version:
+        description: "Java version to use"
+        type: string
+        required: false
+        default: "21"
+      java_distribution:
+        description: "JDK distribution to use"
+        type: string
+        required: false
+        default: "corretto"
+      magic_string:
+        description: "Example string"
+        type: string
+        required: false
+        default: "foo"
+
+
+jobs: 
+  debug:
+    name: Debug job
+    runs-on: ubuntu-latest
+    steps:
+    - name: Log version
+      shell: bash
+      run: echo "debug job, using action template v1.0.2"
+  build:
+    name: Build job
+    runs-on: ubuntu-latest
+    steps:
+    - name: Log version
+      shell: bash
+      run: echo "build job, using action template v1.0.2"
+    - name: Log magic string
+      shell: bash
+      run: echo "magic string=${{ inputs.magic_string }}"
