@@ -1,0 +1,35 @@
+name: "Gradle Build Action"
+description: "Build Java projects using Gradle"
+
+inputs:
+  java_version:
+    description: "Java version to use"
+    required: false
+    default: "21"
+  java_distribution:
+    description: "JDK distribution to use"
+    required: false
+    default: "corretto"
+  magic_string:
+    description: "Example string"
+    required: false
+    default: "foo"
+
+runs:
+  using: "composite"
+  jobs: 
+    debug:
+      name: Debug job
+      steps:
+      - name: Log version
+        shell: bash
+        run: echo "debug job, using action template v1.0.2"
+    build:
+      name: Build job
+      steps:
+      - name: Log version
+        shell: bash
+        run: echo "build job, using action template v1.0.2"
+      - name: Log magic string
+        shell: bash
+        run: echo "magic string=${{ inputs.magic_string }}"
